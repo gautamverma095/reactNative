@@ -45,7 +45,7 @@ const NasaForm: React.FC<obj> = (props:obj) => {
           console.log(err);
       })
 
-
+      
     };
     const handleRandom = () => {
         randomData().then((res) => {
