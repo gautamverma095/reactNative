@@ -1,7 +1,6 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState} from 'react';
-import Question from '../Question/Question';
-import Type from '../../Type';
+import Question from '../../components/Question/Question';
 import { Dimensions } from 'react-native';
 const {width, height} = Dimensions.get('window');
 

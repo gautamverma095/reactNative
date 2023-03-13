@@ -1,9 +1,9 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Quiz from './src/components/Quiz/Quiz';
+import Quiz from './src/views/QuizScreen/Quiz';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CandidateDetails from './src/components/CandidateDetails/CandidateDetails';
+import CandidateDetails from './src/views/CandidateFormScreen/CandidateDetails';
 import Result from './src/components/Result/Result';
 
 
