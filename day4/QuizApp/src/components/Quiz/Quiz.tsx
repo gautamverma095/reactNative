@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState} from 'react';
-import Question from './Question';
-import Type from './Type';
+import Question from '../Question/Question';
+import Type from '../../Type';
 import { Dimensions } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
@@ -45,11 +45,26 @@ let arr: QuizProps[] = [
   },
   {
     question: 'How Many formats are there in Cricket ?',
-    options: ["1","2","3","4"],
+    options: ['India', 'USA', 'France', 'Japan'],
     correct: 3,
     type: 'multiple choice question',
     marked: -1,
   },
+  {
+    question: 'Match the countries with their capitals',
+    options: ['1', '2', '3', '4'],
+    correct: 3,
+    type: 'multiple choice question',
+    marked: -1,
+  },
+  // {
+  //   question: 'How Many formats are there in Cricket ?',
+  //   options: ['India', 'USA', 'France', 'Japan'],
+  //   correct: 3,
+  //   type: 'multiple choice question',
+  //   answers: ['New Delhi', 'Washington D.C.', 'Paris', 'Tokyo'],
+  //   marked: -1,
+  // },
 ];
 
 type itemProp = {
@@ -101,7 +116,7 @@ const Quiz = ({navigation}:any) => {
   }
   return (
     <View style={styles.viewStyle}>
-      
+
       <View
         style={{
           flexDirection: 'row',

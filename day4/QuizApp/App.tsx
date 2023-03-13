@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Quiz from './components/Quiz';
+import Quiz from './src/components/Quiz/Quiz';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CandidateDetails from './components/CandidateDetails';
-import Result from './components/Result';
+import CandidateDetails from './src/components/CandidateDetails/CandidateDetails';
+import Result from './src/components/Result/Result';
 
 
 const App = () => {
