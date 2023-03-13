@@ -16,6 +16,7 @@ const CandidateDetails = (props: obj) => {
   const language = ['English'];
 
   const handleStart = () => {
+
     props.navigation.navigate('Quiz', {
       question: '',
       option1: '',
@@ -24,6 +25,10 @@ const CandidateDetails = (props: obj) => {
       option4: '',
       correct: '',
     });
+    setName("")
+    setEmail("")
+    setLang("")
+    setPhone("")
   }
 
 
