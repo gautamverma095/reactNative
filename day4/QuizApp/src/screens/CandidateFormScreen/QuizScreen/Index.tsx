@@ -1,6 +1,6 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState} from 'react';
-import Question from '../../components/Question/Question';
+import Question from '../../../components/Question/Question';
 import { Dimensions } from 'react-native';
 // import DragAndDropQuestion from '../../components/Draggable/Draggable';
 const {width, height} = Dimensions.get('window');
