@@ -27,7 +27,7 @@ let incorrect = totalQuestion - score;
   incorrect = Math.ceil((incorrect * 100) / totalQuestion);
   score = Math.ceil((score * 100) / totalQuestion);
   const widthAndHeight = 300;
-  console.warn(score, incorrect);
+  // console.warn(score, incorrect);
   
   // console.warn(reportProps);
   const series = [incorrect, score];
