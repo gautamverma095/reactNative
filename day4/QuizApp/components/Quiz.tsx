@@ -101,6 +101,7 @@ const Quiz = ({navigation}:any) => {
   }
   return (
     <View style={styles.viewStyle}>
+      
       <View
         style={{
           flexDirection: 'row',
