@@ -1,4 +1,10 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, { useState } from 'react'
 
 
@@ -45,7 +51,7 @@ const NasaForm: React.FC<obj> = (props:obj) => {
           console.log(err);
       })
 
-      
+
     };
     const handleRandom = () => {
         randomData().then((res) => {
@@ -61,8 +67,9 @@ const NasaForm: React.FC<obj> = (props:obj) => {
         onChangeText={preVal => setText(preVal)}
               value={text}
               keyboardType= "numeric"
-        placeholder="Enter asteroid Id"
-      />
+        placeholder="Enter asteroid Id"  />
+
+
       <TouchableOpacity style={styles.button} onPress={handleRandom}>
         <Text style={styles.text}>Random Asteroid</Text>
       </TouchableOpacity>
@@ -72,7 +79,9 @@ const NasaForm: React.FC<obj> = (props:obj) => {
         onPress={onPress}>
         <Text style={styles.text}>Submit </Text>
       </TouchableOpacity>
+
     </View>
+
   );
 };
 
