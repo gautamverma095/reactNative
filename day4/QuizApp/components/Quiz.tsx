@@ -8,7 +8,7 @@ const {width, height} = Dimensions.get('window');
 type QuizProps = {
   question: string;
   options: string[];
-  correct_answer: number;
+  correct: number;
   type: string;
   marked: number;
 };
@@ -17,22 +17,37 @@ let arr: QuizProps[] = [
   {
     question: 'What is the pH value of the human body?',
     options: ['9.2 to 9.8', '7.0 to 7.8', '6.1 to 6.3', '5.4 to 5.6'],
-    correct_answer: 2,
+    correct: 2,
     type: 'multiple choice question',
     marked: -1,
   },
   {
     question: 'The capital of Australia is Sydney',
     options: ['True', 'False'],
-    correct_answer: 2,
+    correct: 2,
     type: 'True/False question',
     marked: -1,
   },
   {
     question: 'A century is a score of ______ or more.',
     options: ['50', '100', ' 70', '90'],
-    correct_answer: 2,
+    correct: 2,
     type: 'Fill in the blanks',
+    marked: -1,
+  },
+  {
+    question:
+      ' Which of the following gas is reduced in the reduction process?',
+    options: ['Oxygen', 'Helium', 'Carbon', 'Hydrogen'],
+    correct: 4,
+    type: 'multiple choice question',
+    marked: -1,
+  },
+  {
+    question: 'How Many formats are there in Cricket ?',
+    options: ["1","2","3","4"],
+    correct: 3,
+    type: 'multiple choice question',
     marked: -1,
   },
 ];
@@ -42,12 +57,14 @@ type itemProp = {
   index: any;
   preVal: any;
   res: any;
+  navigation: any;
 };
 
-const Quiz = () => {
+const Quiz = ({navigation}:any) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [questionsArr, setQuestionsArr] = useState(arr);
   const arrRef = useRef<any>()
+  const [score,setScore] = useState<any>(0)
 
   const handleSelect = (index: number, preVal: any) => {
     // console.warn(index,preVal);
@@ -57,17 +74,63 @@ const Quiz = () => {
         return (el.marked = preVal);
       }
     });
-    // console.warn(tempData);
+    // console.warn(index,preVal);
+    if (preVal == questionsArr[index].correct)
+    {
+      setScore(score+1)
+      }
     setQuestionsArr(tempData);
     // let res = []
     // tempData.map((el, ind) => {
     //   res.push(el)
     // })
     // setQuestionsArr(res)
+
+
   };
+
+
+  const handleReset = () => {
+    const tempData = [...arr];
+    tempData.map((el, i) => {
+     
+        return (el.marked = -1);
+    });
+    setQuestionsArr(tempData);
+  
+  }
   return (
     <View style={styles.viewStyle}>
-      <Text style={styles.textStyle}>Quiz:{currentQuestion}</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text style={styles.textStyle}>Quiz:{currentQuestion}</Text>
+        <Text
+          onPress={() => {
+            handleReset()
+            arrRef.current.scrollToIndex({
+              animated: true,
+              index:0
+            })
+          }}
+          
+          style={{
+            fontSize: 25,
+            textAlign: 'center',
+            color: 'black',
+            backgroundColor: 'teal',
+            borderRadius: 10,
+            borderColor: 'teal',
+            borderWidth: 3,
+            marginTop: 5,
+            marginRight: 6,
+          }}>
+          Reset Quiz
+        </Text>
+      </View>
 
       <View style={{marginTop: 10}}>
         <FlatList
@@ -106,8 +169,9 @@ const Quiz = () => {
         }}>
         <TouchableOpacity
           style={{
-            backgroundColor: 'teal',
+            backgroundColor: currentQuestion>1? 'teal':"grey",
             height: 50,
+            // disabled:{currentQuestion == 1? true:false},
             width: 130,
             borderRadius: 10,
             marginLeft: 20,
@@ -130,33 +194,65 @@ const Quiz = () => {
             Previous
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: 'teal',
-            height: 50,
-            width: 130,
-            borderRadius: 10,
-            marginLeft: 80,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onPress={() => {
-            //  console.warn(currentQuestion);
-            if (currentQuestion < questionsArr.length) {
-              // console.warn(currentQuestion);
-              arrRef.current.scrollToIndex({
-                animated: true,
-                index: +currentQuestion,
-              });
-            }
-          }}>
-          <Text
+        {currentQuestion == arr.length ? (
+          <TouchableOpacity
             style={{
-              fontSize: 30,
+              backgroundColor: 'black',
+              height: 50,
+              width: 130,
+              borderRadius: 10,
+              marginLeft: 80,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              navigation.navigate('Result', {
+                score: score,
+                totalQuestion: arr.length,
+              });
             }}>
-            Next
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 30,
+                color: 'white',
+              }}>
+              Submit
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'teal',
+              height: 50,
+              width: 130,
+              borderRadius: 10,
+              marginLeft: 80,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+              onPress={() => {
+              
+                if (questionsArr[currentQuestion-1].marked !== -1)
+                {
+                  //  console.warn(currentQuestion);
+                  if (currentQuestion < questionsArr.length) {
+                    // console.warn(currentQuestion);
+                    arrRef.current.scrollToIndex({
+                      animated: true,
+                      index: +currentQuestion,
+                    });
+                  }
+                }
+             
+            }}>
+            <Text
+              style={{
+                fontSize: 30,
+              }}>
+              Next
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

@@ -4,6 +4,7 @@ import Quiz from './components/Quiz';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CandidateDetails from './components/CandidateDetails';
+import Result from './components/Result';
 
 
 const App = () => {
@@ -11,17 +12,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Quiz">
-        <Stack.Screen name="Candidate" component={CandidateDetails} />
+      <Stack.Screen name="Candidate" component={CandidateDetails} />
       <Stack.Screen name ="Quiz"  component={Quiz}/>
-{/* 
-        <Quiz
-          question={''}
-          option1={''}
-          option2={''}
-          option3={''}
-          option4={''}
-          correct={''}
-        /> */}
+      <Stack.Screen name ="Result"  component={Result}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
