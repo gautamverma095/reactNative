@@ -2,9 +2,9 @@ import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Result from '../../views/ResultScreen/Index';
-import Quiz from '../../views/QuizScreen/Index';
-import CandidateDetails from '../../views/CandidateFormScreen/Index';
+import Result from '../../screens/ResultScreen/Index';
+import Quiz from '../../screens/QuizScreen/Index';
+import CandidateDetails from '../../screens/CandidateFormScreen/Index';
 
 const AllRoutes = () => {
       const Stack = createNativeStackNavigator();
