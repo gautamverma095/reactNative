@@ -2,6 +2,7 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import Question from '../../components/Question/Question';
 import { Dimensions } from 'react-native';
+// import DragAndDropQuestion from '../../components/Draggable/Draggable';
 const {width, height} = Dimensions.get('window');
 
 type QuizProps = {
@@ -10,6 +11,7 @@ type QuizProps = {
   correct: number;
   type: string;
   marked: number;
+  ans:string[]
 };
 
 let arr: QuizProps[] = [
@@ -19,6 +21,7 @@ let arr: QuizProps[] = [
     correct: 2,
     type: 'multiple choice question',
     marked: -1,
+    ans: [''],
   },
   {
     question: 'The capital of Australia is Sydney',
@@ -26,6 +29,7 @@ let arr: QuizProps[] = [
     correct: 2,
     type: 'True/False question',
     marked: -1,
+    ans: [''],
   },
   {
     question: 'A century is a score of ______ or more.',
@@ -33,6 +37,7 @@ let arr: QuizProps[] = [
     correct: 2,
     type: 'Fill in the blanks',
     marked: -1,
+    ans: [''],
   },
   {
     question:
@@ -41,6 +46,7 @@ let arr: QuizProps[] = [
     correct: 4,
     type: 'multiple choice question',
     marked: -1,
+    ans: [''],
   },
   {
     question: 'How Many formats are there in Cricket ?',
@@ -48,6 +54,7 @@ let arr: QuizProps[] = [
     correct: 3,
     type: 'multiple choice question',
     marked: -1,
+    ans: [''],
   },
   {
     question: 'Match the countries with their capitals',
@@ -55,15 +62,16 @@ let arr: QuizProps[] = [
     correct: 3,
     type: 'multiple choice question',
     marked: -1,
+    ans: [''],
   },
-  // {
-  //   question: 'How Many formats are there in Cricket ?',
-  //   options: ['India', 'USA', 'France', 'Japan'],
-  //   correct: 3,
-  //   type: 'multiple choice question',
-  //   answers: ['New Delhi', 'Washington D.C.', 'Paris', 'Tokyo'],
-  //   marked: -1,
-  // },
+  {
+    question: 'How Many formats are there in Cricket ?',
+    options: ['India', 'USA', 'France', 'Japan'],
+    correct: 3,
+    type: 'drag',
+    ans: ['New Delhi', 'Washington D.C.', 'Paris', 'Tokyo'],
+    marked: -1,
+  },
 ];
 
 type itemProp = {
@@ -164,11 +172,26 @@ const Quiz = ({navigation}:any) => {
           renderItem={({item, index}) => {
             return (
               <>
-                {/* <Type type={item} /> */}
                 <Question
                   question={item}
                   selected={(preVal: any) => handleSelect(index, preVal)}
                 />
+                {/* {
+                  item.type == 'drag' ? (
+                  <DragAndDropQuestion
+                    question={item} 
+                    answers={item.ans}
+                    onAnswered={function (correct: boolean): void {
+                      throw new Error('Function not implemented.');
+                    } }                    // selected={(preVal: any) => handleSelect(index, preVal)}
+                  />
+                ) : (
+                  <Question
+                    question={item}
+                      selected={(preVal: any) =>
+                        handleSelect(index, preVal)}
+                  />
+                )} */}
               </>
             );
           }}
